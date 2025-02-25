@@ -28,7 +28,7 @@ id="nav">
             </li>
             
             <li class="hover:animate-bounce font-bold">
-                 @auth
+                @auth
                 <form method="POST" action="{{ route('logout') }}">
                 @csrf
                     <button id="btn2" type="submit" class=" px-4 py-2 bg-red-500 text-white p-2 rounded  mt-3">Cerrar Sesión</button>

@@ -13,14 +13,13 @@ class Usuario extends Authenticatable
     protected $table = 'usuarios';
 
     public function getAuthPassword()
-{
-    return $this->contraseña;
-}
-
+    {
+        return $this->contraseña;
+    }
 
     // Atributos que se pueden asignar en masa
     protected $fillable = [
-        'usuario', 'nombre', 'contraseña', 'email',
+        'usuario', 'nombre', 'contraseña', 'email', 'rol',
     ];
 
     // Atributos que deben estar ocultos para los arrays
@@ -33,10 +32,9 @@ class Usuario extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Método para encriptar la contraseña antes de guardarla (comentado)
+    // Método para encriptar la contraseña antes de guardarla
     public function setContraseñaAttribute($value)
-{
-    $this->attributes['contraseña'] = bcrypt($value);
-}
-
+    {
+        $this->attributes['contraseña'] = bcrypt($value);
+    }
 }

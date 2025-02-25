@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('contraseña');
             $table->string('email')->unique();
+            $table->string('rol')->default('user'); // Añadir columna 'rol' con valor por defecto 'user'
             $table->timestamps();
         });
     }

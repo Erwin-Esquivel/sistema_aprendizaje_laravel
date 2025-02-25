@@ -5,33 +5,47 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
+    public function verificarRol()
     {
-        return view('login2'); // Usa la vista subida
+        $usuario = Auth::user();
+        
+        if (!$usuario) {
+            return response()->json(['message' => 'No autenticado'], 401);
+        }
+        
+        if ($usuario->rol === 'admin') {
+            return redirect()->route('admin');
+        }
+        
+        return redirect()->route('index');
     }
-    
 
     public function login(Request $request)
     {
-        
-       // dd($request->all()); 
-        // Adaptar las credenciales para el intento de autenticación
+        // Validar los datos del formulario
+        $request->validate([
+            'usuario' => 'required|string|max:255',
+            'contraseña' => 'required|string',
+        ]);
+
+        // Intentar autenticar al usuario usando el campo 'usuario'
         $credentials = [
             'usuario' => $request->input('usuario'),
-            'password' => $request->input('contraseña'), // Laravel espera 'password' aquí
+            'password' => $request->input('contraseña'),
         ];
-        
+
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('index')->with('success', 'Bienvenido');
+            // Verificar el rol después de la autenticación
+            return $this->verificarRol();
+        } else {
+            // Si la autenticación falla
+            return redirect()->back()->withErrors(['usuario' => 'Las credenciales no coinciden.']);
         }
-        
-        return back()->withErrors(['usuario' => 'Credenciales incorrectas']);
-        
-        
     }
 
     // Cerrar sesión
@@ -41,7 +55,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success', 'Sesión cerrada.');
+        return redirect()->route('login2')->with('success', 'Sesión cerrada.');
     }
-    
 }

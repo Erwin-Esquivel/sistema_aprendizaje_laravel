@@ -1,46 +1,56 @@
-<?php
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsuarioController;
 
-return [
+// Ruta para mostrar el formulario de inicio de sesión
+Route::get('/login', function () {
+    return view('login2'); // Asegúrate de que 'login2.blade.php' está en resources/views
+})->name('login');
 
-    'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'usuarios'),
-    ],
+// Ruta para procesar el inicio de sesión
+Route::post('/login', [AuthController::class, 'login'])->name('usuario.login');
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'usuarios',
-        ],
+// Ruta para mostrar el formulario de registro
+Route::get('/registro', function () {
+    return view('registro'); // Asegúrate de que 'registro.blade.php' está en resources/views
+})->name('registro');
 
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'usuarios',
-            'hash' => false,
-        ],
-    ],
+// Ruta para procesar el registro de usuarios
+Route::post('/registro', [UsuarioController::class, 'agregarUsuario'])->name('usuario.registrar');
 
-    'providers' => [
-        'usuarios' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Usuario::class,
-        ],
+// Ruta para redirigir según el rol del usuario
+Route::get('/verificar-rol', [AuthController::class, 'verificarRol'])->name('usuario.verificarRol');
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
+// Ruta para el panel de administración (Solo accesible para administradores)
+Route::get('/admin', function () {
+    return view('admin'); // Asegúrate de que 'admin.blade.php' está en resources/views
+})->middleware('auth')->name('admin');
 
-    'passwords' => [
-        'usuarios' => [
-            'provider' => 'usuarios',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-    ],
+// Ruta para la página principal (Index)
+Route::get('/index', function () {
+    return view('index'); // Asegúrate de que 'index.blade.php' está en resources/views
+})->middleware('auth')->name('index');
 
-    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
-];
+
+
+
+
+
+
+
+  
+       // dd($request->all()); 
+        // Adaptar las credenciales para el intento de autenticación
+        $credentials = [
+            'usuario' => $request->input('usuario'),
+            'password' => $request->input('contraseña'), // Laravel espera 'password' aquí
+        ];
+        
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('index')->with('success', 'Bienvenido');
+        }
+        
+        return back()->withErrors(['usuario' => 'Credenciales incorrectas']);
+        
+        

@@ -21,7 +21,6 @@
                     <p class="text-red-500">{{ $errors->first() }}</p>
                     @endif
 
-
                     <h2 class="text-base m-0 p-0 font-normal block" >Ingresa tu Usuario : </h2>
                     <input class="w-full h-[50px] my-[10px] border-none border-b-2 border-black text-black  text-[16px] bg-gradient-to-br from-blue-250 to-green-400" type="text" name="usuario" placeholder="Usuario" required>
 
@@ -36,7 +35,6 @@
 
                 </form>
         </div>
-
 
             <div class=" w-[650px] h-[550px] text-white bg-black box-border p-[30px] px-[40px] rounded-[10px]">
                 <h2 class="title text-[24px] font-bold text-center mt-[15px] pb-[30px]">Inicia Sesion con tus redes</h2>

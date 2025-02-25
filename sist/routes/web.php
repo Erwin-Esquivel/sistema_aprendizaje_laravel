@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,6 +36,16 @@ Route::get('/olvido', function(){
     return view('olvido');
 })->name("olvido");
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
+Route::get('/admin', function(){
+    return view('admin');
+})->name("admin");
+
+Route::get('/creditos', function(){
+    return view('creditos');
+})->name("creditos");
+
+Route::get('/verificar-rol', [AuthController::class, 'verificarRol'])->name('usuario.verificarRol');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::post('/registrar', [UsuarioController::class, 'agregarUsuario'])->name('usuario.registrar');
