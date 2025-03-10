@@ -29,8 +29,6 @@
 
                     <button class="w-full h-[40px] my-[10px] border-none text-white outline-none 
                     text-black bg-blue-500 text-[16px] rounded-[25px] hover:bg-[#3f8cb5] cursor-pointer" type="submit">Acceder</button>
-
-                    <a class="block text-[18px] text-gray-500 mt-[5px] no-underline hover:text-black" href="{{ route('olvido') }}">¿Olvidaste tu contraseña?</a>
                     <a class="block text-[18px] text-gray-500 mt-[5px] no-underline hover:text-black" href="{{ route('registro') }}">Registrate</a>
 
                 </form>

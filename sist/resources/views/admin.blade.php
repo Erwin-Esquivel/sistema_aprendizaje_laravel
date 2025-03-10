@@ -10,12 +10,13 @@
 <nav class="flex p-3 bg-gradient-to-r from-green-500 to-green-900 text-white justify-center" 
 id="nav">
         <ul class="flex space-x-4">
-            <a  class="text-sm rounded-lg no-underline py-2.5 px-12 text-white bg-green-700 flex flex-col uppercase my-2 tracking-wide text-center transition-all duration-300 ease-in-out hover:bg-green-900 hover:scale-110">
+            <a  class="text-sm rounded-lg no-underline py-2.5 px-12 text-white bg-green-700 flex flex-col uppercase my-2 tracking-wide text-center transition-all duration-300 ease-in-out hover:bg-green-900 hover:scale-110"
+            href="{{ route('usuarios_m') }}">
             Usuarios
             </a>
 
             <a  class="text-sm rounded-lg no-underline py-2.5 px-12 text-white bg-green-700 flex flex-col uppercase my-2 tracking-wide text-center transition-all duration-300 ease-in-out hover:bg-green-900 hover:scale-110"
-            href="{{ route('preguntas') }}">
+            >
             Editar informacion de usuarios
             </a>
             

@@ -27,6 +27,15 @@ id="nav">
             <li class=" absolute right-3 hover:animate-bounce font-bold mt-[-5px]" >
                 <button class="px-4 py-2 cursor-pointer border-0 outline-none bg-[#212121] text-white font-semibold tracking-wide rounded-md shadow-md mt-3" id="btn">DARK</button>
             </li>
+
+            <li class="hover:animate-bounce font-bold">
+                @auth
+                <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                    <button id="btn2" type="submit" class=" px-4 py-2 bg-red-500 text-white p-2 rounded  mt-3">Cerrar Sesión</button>
+                </form>
+                @endauth
+            </li>
         </ul>
     </nav>
 

@@ -19,7 +19,8 @@ id="nav">
             Preguntas Frecuentes
             </a>
             
-            <a  class="text-sm rounded-lg no-underline py-2.5 px-12 text-white bg-blue-700 flex flex-col uppercase my-2 tracking-wide text-center transition-all duration-300 ease-in-out hover:bg-blue-900 hover:scale-110">
+            <a  class="text-sm rounded-lg no-underline py-2.5 px-12 text-white bg-blue-700 flex flex-col uppercase my-2 tracking-wide text-center transition-all duration-300 ease-in-out hover:bg-blue-900 hover:scale-110"
+            href="{{ route('creditos') }}">
             creditos
             </a>
 
@@ -95,7 +96,7 @@ id="nav">
         });
 
          // Lista de diálogos
-         const textos = [
+        const textos = [
             "¡Hola! Soy Nutz y en esta plataforma te enseñaré sobre finanzas.",
             "Aprenderás sobre ahorro, inversiones e impuestos de manera sencilla.",
             "¡Diviértete con juegos y actividades interactivas!",
@@ -124,6 +125,67 @@ id="nav">
         document.getElementById("btnActividad").addEventListener("click", function() {
             window.location.href = "{{ route('actividad') }}";
         });
+
+        // Detectar si la actividad fue completada
+        const urlParams = new URLSearchParams(window.location.search);
+        const actividadCompletada = urlParams.get('actividad_completada');
+
+        if (actividadCompletada) {
+            const nuevosTextos = [
+                "¡Felicidades por completar la actividad!",
+                "Ahora veamos sobre lo que es una inversión.",
+                "Ve este <a href='https://www.youtube.com/watch?v=1FEfkcyDKbg' target='_blank' class='text-blue-500 underline'>video</a> para saber sobre las inversiones.",
+                "¿Listo?, veamos qué has aprendido."
+            ];
+
+            let indice = 0;
+            document.getElementById("dialogo").innerHTML = nuevosTextos[indice];
+            document.getElementById("btnSiguiente").classList.remove("hidden");
+            document.getElementById("btnActividad").classList.add("hidden");
+
+            document.getElementById("btnSiguiente").onclick = function() {
+                indice++;
+                if (indice < nuevosTextos.length) {
+                    document.getElementById("dialogo").innerHTML = nuevosTextos[indice];
+                    if (indice === nuevosTextos.length - 1) {
+                        document.getElementById("btnSiguiente").classList.add("hidden");
+                        document.getElementById("btnActividad").classList.remove("hidden");
+                    }
+                }
+            };
+
+            document.getElementById("btnActividad").addEventListener("click", function() {
+                window.location.href = "{{ route('actividad2') }}";
+            });
+        }
+        const urlParam = new URLSearchParams(window.location.search);
+        const actividadCompletada2 = urlParam.get('actividad_completada2');
+
+        if (actividadCompletada2) {
+            const nuevosTextos = [
+                "¡Felicidades por completar la segunda actividad!",
+            ];
+
+            let indice = 0;
+            document.getElementById("dialogo").innerHTML = nuevosTextos[indice];
+            document.getElementById("btnSiguiente").classList.remove("hidden");
+            document.getElementById("btnActividad").classList.add("hidden");
+
+            document.getElementById("btnSiguiente").onclick = function() {
+                indice++;
+                if (indice < nuevosTextos.length) {
+                    document.getElementById("dialogo").innerHTML = nuevosTextos[indice];
+                    if (indice === nuevosTextos.length - 1) {
+                        document.getElementById("btnSiguiente").classList.add("hidden");
+                        document.getElementById("btnActividad").classList.remove("hidden");
+                    }
+                }
+            };
+
+            document.getElementById("btnActividad").addEventListener("click", function() {
+                window.location.href = "{{ route('actividad2') }}";
+            });
+        }
     </script>
 </body>
 </html>

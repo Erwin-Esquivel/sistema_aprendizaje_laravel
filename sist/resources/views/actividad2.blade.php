@@ -29,14 +29,12 @@ id="nav">
             </li>
         </ul>
     </nav>
-
     <div id="pregun" class="flex flex-col justify-center items-center h-[520px] bg-gray-200 p-4 transition-bg duration-500 ease-in-out">
     <h1 class="text-xl font-bold mb-4">Completa el párrafo:</h1>
     
-    <p class="bg-white p-4 rounded-lg shadow-md border border-gray-300 text-gray-700 text-center w-[700px]">
-        El <input type="text" id="respuesta1" class="border-b-2 border-gray-400 outline-none w-[300px] text-center">, mejor conocido como RFC.
-        El RFC es una <input type="text" id="respuesta2" class="border-b-2 border-gray-400 outline-none w-24 text-center"> 
-        que se asigna a las personas físicas y morales que realizan actividades económicas en México.
+    <p class="bg-white p-4 rounded-lg shadow-md border border-gray-300 text-gray-700 text-center w-[500px]">
+        Una inversión es una actividad que consiste en renunciar al<input type="text" id="respuesta1" class="border-b-2 border-gray-400 outline-none w-[300px] text-center">
+        de los recursos con el objetivo de obtener un beneficio mayor en el<input type="text" id="respuesta2" class="border-b-2 border-gray-400 outline-none w-24 text-center">.
     </p>
 
     <button onclick="verificarRespuestas()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">
@@ -108,12 +106,12 @@ id="nav">
             const cuadroDialogo = document.getElementById("cuadroDialogo");
             const dialogoTexto = document.getElementById("dialogo");
 
-            if (r1 === "registro federal de contribuyentes" || r1==="Registro Federal de Contribuyentes" 
-            && r2 === "Clave Unica" || r2==="clave unica" ) {
-                dialogoTexto.textContent = "✅ ¡Bien hecho! Has aprendido sobre el RFC, vayamos a lo que sigue.";
+            if (r1 === "beneficio inmediato" || r1==="Beneficio inmediato" 
+            && r2 === "futuro" || r2==="Futuro" ) {
+                dialogoTexto.textContent = "✅ ¡Bien hecho! Has aprendido sobre las inveriones, vayamos a lo que sigue.";
                 btnSiguiente.classList.remove("hidden");
                 document.getElementById("btnSiguiente").addEventListener("click", function() {
-                    window.location.href = "{{ route('index', ['actividad_completada' => 1]) }}";
+                    window.location.href = "{{ route('index', ['actividad_completada2' => 1]) }}";
                 });
             } else {
                 dialogoTexto.textContent = "❌ Inténtalo de nuevo, puedes lograrlo.";
@@ -126,5 +124,9 @@ id="nav">
 
 
     </script>
+
+
+
+
 </body>
 </html>
